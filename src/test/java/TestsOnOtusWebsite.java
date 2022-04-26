@@ -132,11 +132,10 @@ public class TestsOnOtusWebsite {
 //        Открыть https://otus.ru в "чистом браузере"
         SessionId sessionID=((ChromeDriver)driver).getSessionId();
         System.out.println("Current session1 is " + sessionID.toString());
-        driver.close();
 
-        //SessionId sessionID2=((ChromeDriver)driver).getSessionId();
-//        System.out.println("Current session2 is " + sessionID2.toString());
-        //driver.quit();
+        //driver.close();
+        driver.quit();
+
         WebDriver driver = new ChromeDriver();
         //Thread.sleep(5000);
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
