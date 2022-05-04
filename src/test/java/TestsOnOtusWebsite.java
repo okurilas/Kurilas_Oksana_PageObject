@@ -47,25 +47,24 @@ public class TestsOnOtusWebsite {
 
     @Test
     public void changeMyContactData() {
-        By otusHeader = By.cssSelector(".header2__logo");
-        By aboutMe = By.xpath("//a[contains(text(),'О себе')]");
-        By contactOption = By.cssSelector("div.input.input_full.lk-cv-block__input.input_straight-bottom-right.input_straight-top-right.input_no-border-right.lk-cv-block__input_fake.lk-cv-block__input_select-fake.js-custom-select-presentation");
-        By vk = By.xpath("//button[contains(text(),'VK')]");
-        By facebook = By.xpath("//button[contains(text(),'Facebook')]");
-        By contactValueOne = By.id("id_contact-0-value");
-        By contactValueTwo = By.id("id_contact-1-value");
-        By add = By.xpath("//button[contains(text(),'Добавить')]");
-        By save = By.xpath("//button[contains(text(),'Сохранить и продолжить')]");
+//        By otusHeader = By.cssSelector(".header2__logo");
+//        By aboutMe = By.xpath("//a[contains(text(),'О себе')]");
+//        By contactOption = By.cssSelector("div.input.input_full.lk-cv-block__input.input_straight-bottom-right.input_straight-top-right.input_no-border-right.lk-cv-block__input_fake.lk-cv-block__input_select-fake.js-custom-select-presentation");
+//        By vk = By.xpath("//button[contains(text(),'VK')]");
+//        By facebook = By.xpath("//button[contains(text(),'Facebook')]");
+//        By contactValueOne = By.id("id_contact-0-value");
+//        By contactValueTwo = By.id("id_contact-1-value");
+//        By add = By.xpath("//button[contains(text(),'Добавить')]");
+//        By save = By.xpath("//button[contains(text(),'Сохранить и продолжить')]");
 
         logger.info("Открыть website OTUS");
 
         init();
         LoginPage loginPage = new LoginPage(driver);
         //loginPage.init();
-        loginPage.open();
-        //driver.get(cfg.urlOTUS());//driver.get("http://otus.ru");
-
-        Assert.assertTrue(wait.until(ExpectedConditions.elementToBeClickable(otusHeader)).isEnabled());
+        //loginPage.open();//driver.get(cfg.urlOTUS());//driver.get("http://otus.ru");
+        WebElement headerOTUS = loginPage.open();
+        Assert.assertTrue(headerOTUS.isEnabled());
 
         //authFormComponent.auth(driver, wait, logger);
 

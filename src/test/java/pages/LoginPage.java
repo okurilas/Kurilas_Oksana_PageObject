@@ -17,14 +17,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
 
-    private WebDriver driver;
-    private IConfigServer cfg = ConfigFactory.create(IConfigServer.class);
-    private Logger logger = LogManager.getLogger(LoginPage.class);
-    private WebDriverWait wait;
-    private Actions actions;
+    //private WebDriver driver;
+    //private IConfigServer cfg = ConfigFactory.create(IConfigServer.class);
+    //private Logger logger = LogManager.getLogger(LoginPage.class);
+    //private WebDriverWait wait;
+    //private Actions actions;
 
+    @FindBy (css = ".header2__logo")
+    private WebElement  otusHeader;
     @FindBy (xpath = "//button[contains(text(),'Вход')]")
     private WebElement loginBtn;
     @FindBy (css = ".js-login input[name='email']")
@@ -46,14 +48,17 @@ public class LoginPage {
 
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
+        super(driver);
     }
 
-    public void open (){
+    public WebElement open (){
         //driver = new ChromeDriver();//////////////////////////////////////////
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));/////////////////////////////
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));/////////////////////////////
         driver.get(cfg.urlOTUS());
+        WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
+        return headerOTUS;
+
+        //Assert.assertTrue(wait.until(ExpectedConditions.elementToBeClickable(otusHeader)).isEnabled());
     }
 
 
@@ -73,7 +78,7 @@ public class LoginPage {
     public WebElement login (){
 
         logger.info("Авторизация");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));///////////////////////////////////////
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));///////////////////////////////////////
 
 
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
