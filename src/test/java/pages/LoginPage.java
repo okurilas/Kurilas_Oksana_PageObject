@@ -1,6 +1,7 @@
 package pages;
 
 import config.IConfigServer;
+import driverFactory.WebDriverFactory;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,60 +39,32 @@ public class LoginPage extends BasePage{
     @FindBy (css = "div.header2-menu__icon-img.ic-blog-default-avatar")
     private WebElement avatar;
 
+    public LoginPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
 
-//    private By loginBtn = By.xpath("//button[contains(text(),'Вход')]");
-//    private By loginField = By.cssSelector(".js-login input[name='email']");
-//    private By pwdField = By.xpath("//input[@type='password']");
-//    private By loginButton = By.xpath("//button[contains(text(),'Войти')]");
-//    private By avatar = By.cssSelector("div.header2-menu__icon-img.ic-blog-default-avatar");
-
-
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
     }
 
     public WebElement open (){
-        //driver = new ChromeDriver();//////////////////////////////////////////
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));/////////////////////////////
         driver.get(cfg.urlOTUS());
         WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
         return headerOTUS;
-
-        //Assert.assertTrue(wait.until(ExpectedConditions.elementToBeClickable(otusHeader)).isEnabled());
     }
-
-
-//    public LoginPage openn (){
-//        driver.get(cfg.urlOTUS());
-//        return this;
-//    }
-
-
 
     public void init (){
-        driver = new ChromeDriver();
-        logger.info("драйвер поднят");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
+//        driver = WebDriverFactory.getDriver("chrome");
+//        logger.info("драйвер поднят");
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        actions = new Actions(driver);
     }
+
     public WebElement login (){
 
         logger.info("Авторизация");
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));///////////////////////////////////////
-
 
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
                 .click();
         wait.until(ExpectedConditions.visibilityOf(loginField));
         wait.until(ExpectedConditions.visibilityOf(pwdField));
-
-//        driver.findElement(loginField)
-//                .sendKeys(cfg.login());//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
-//        driver.findElement(pwdField)
-//                .sendKeys(cfg.pwd());//.sendKeys("Caiman123!");//.sendKeys(cfg.pwd());
-//        driver.findElement(loginButton)
-//                .submit();
 
         loginField
                 .sendKeys(cfg.login());//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
@@ -101,35 +74,8 @@ public class LoginPage extends BasePage{
                 .submit();
 
         WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
-        //Assert.assertTrue((avatarPic).isDisplayed());
         logger.info("Авторизация прошла успешно");
         return avatarPic;
 
     }
-
-//    public UserPage loginn (){
-//
-//        logger.info("Авторизация");
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));///////////////////////////////////////
-//
-//
-//        wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
-//                .click();
-//        wait.until(ExpectedConditions.and(
-//                ExpectedConditions.presenceOfElementLocated(loginField),
-//                ExpectedConditions.presenceOfElementLocated(pwdField)
-//        ));
-//        driver.findElement(loginField)
-//                .sendKeys(cfg.login());//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
-//        driver.findElement(pwdField)
-//                .sendKeys(cfg.pwd());//.sendKeys("Caiman123!");//.sendKeys(cfg.pwd());
-//        driver.findElement(loginButton)
-//                .submit();
-//
-//        WebElement avatarPic = wait.until(ExpectedConditions.presenceOfElementLocated(avatar));
-//        Assert.assertTrue((avatarPic).isDisplayed());
-//        logger.info("Авторизация прошла успешно");
-//        return new UserPage(driver);
-//
-//    }
 }
