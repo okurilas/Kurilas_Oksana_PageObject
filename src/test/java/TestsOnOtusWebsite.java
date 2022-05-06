@@ -31,8 +31,6 @@ public class TestsOnOtusWebsite {
     @Before
     public void setUp(){
         String brName = System.getProperty("br");
-        //Browsers[] browsers = Browsers.values();
-        //driver = WebDriverFactory.getDriver("chrome");
         logger.info("драйвер поднят");
     }
 
@@ -94,7 +92,8 @@ public class TestsOnOtusWebsite {
     }
 
     private void init(){
-        driver = WebDriverFactory.getDriver("chrome");
+        //String brName = System.getProperty("br");
+        driver = WebDriverFactory.getDriver(Browsers.CHROME);
         logger.info("драйвер поднят");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);

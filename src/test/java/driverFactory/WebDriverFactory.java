@@ -9,31 +9,65 @@ import org.openqa.selenium.opera.OperaDriver;
 
 public class WebDriverFactory {
 
-    public static WebDriver getDriver(String driverName) {
+    private Browsers nameOfBrowser;
+
+    public Browsers getNameOfBrowser() {
+        return nameOfBrowser;
+    }
+
+    public void setNameOfBrowser(Browsers nameOfBrowser) {
+        this.nameOfBrowser = nameOfBrowser;
+    }
+
+    public static WebDriver getDriver(Browsers nameOfBrowser) {
 
 
+        switch (nameOfBrowser) {
+            case CHROME:
+                WebDriverManager.chromedriver().setup();
+                return new ChromeDriver();
+            case FIREFOX:
+                WebDriverManager.firefoxdriver().setup();
+                return new FirefoxDriver();
+            case IE:
+                WebDriverManager.iedriver().setup();
+                return new InternetExplorerDriver();
+            case OPERA:
+                WebDriverManager.operadriver().setup();
+                return new OperaDriver();
 
-            switch (driverName) {
-                case "chrome":
-                    WebDriverManager.chromedriver().setup();
-                    return new ChromeDriver();
-                case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    return new FirefoxDriver();
-                case "ie":
-                    WebDriverManager.iedriver().setup();
-                    return new InternetExplorerDriver();
-                case "opera":
-                    WebDriverManager.operadriver().setup();
-                    return new OperaDriver();
+            default:
+                WebDriverManager.chromedriver().setup();
+                return new ChromeDriver();
 
-                default:
-                    WebDriverManager.chromedriver().setup();
-                    return new ChromeDriver();
-
-            }
         }
     }
+}
+
+//    public static WebDriver getDriver(String driverName) {
+//
+//
+//
+//            switch (driverName) {
+//                case "chrome":
+//                    WebDriverManager.chromedriver().setup();
+//                    return new ChromeDriver();
+//                case "firefox":
+//                    WebDriverManager.firefoxdriver().setup();
+//                    return new FirefoxDriver();
+//                case "ie":
+//                    WebDriverManager.iedriver().setup();
+//                    return new InternetExplorerDriver();
+//                case "opera":
+//                    WebDriverManager.operadriver().setup();
+//                    return new OperaDriver();
+//
+//                default:
+//                    WebDriverManager.chromedriver().setup();
+//                    return new ChromeDriver();
+//
+//            }
+//        }
 
 
 
