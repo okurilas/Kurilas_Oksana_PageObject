@@ -33,8 +33,8 @@ public abstract class BasePage {
 
     public WebElement open (){
         driver.get(cfg.urlOTUS());
-        WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
-        return headerOTUS;
+        //WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
+        return wait.until(ExpectedConditions.visibilityOf(otusHeader));
     }
 
 

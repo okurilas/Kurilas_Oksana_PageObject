@@ -57,25 +57,65 @@ public class LoginPage extends BasePage{
 ////        actions = new Actions(driver);
 //    }
 
-    public WebElement login (String UserLogin, String UserPWD){
+//    public WebElement login (String UserLogin, String UserPWD){
+//
+//        logger.info("Авторизация");
+//
+//        wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
+//                .click();
+//        wait.until(ExpectedConditions.visibilityOf(loginField));
+//        wait.until(ExpectedConditions.visibilityOf(pwdField));
+//
+//        loginField
+//                .sendKeys(UserLogin);//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
+//        pwdField
+//                .sendKeys(UserPWD);//.sendKeys("Caiman123!");//.sendKeys(cfg.pwd());
+//        loginButton
+//                .submit();
+//
+//        WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
+//        logger.info("Авторизация прошла успешно");
+//        return avatarPic;
+//    }
 
-        logger.info("Авторизация");
+
+    public void enterLogin (String UserLogin){
 
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
                 .click();
         wait.until(ExpectedConditions.visibilityOf(loginField));
         wait.until(ExpectedConditions.visibilityOf(pwdField));
 
+        logger.info("Ввод логина");
         loginField
                 .sendKeys(UserLogin);//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
+    }
+
+    public void enterPWD (String UserPWD){
+
+        logger.info("Ввод пароля");
         pwdField
                 .sendKeys(UserPWD);//.sendKeys("Caiman123!");//.sendKeys(cfg.pwd());
         loginButton
                 .submit();
-
-        WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
-        logger.info("Авторизация прошла успешно");
-        return avatarPic;
-
     }
+
+    public void clickLoginBtn (){
+
+        logger.info("Нажимаем ЛОГИН");
+        loginButton
+                .submit();
+//        WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
+//        logger.info("Авторизация прошла успешно");
+    }
+
+    public UserPage login (String UserLogin, String UserPWD){
+
+        logger.info("Авторизация");
+        enterLogin(UserLogin);
+        enterPWD(UserPWD);
+        clickLoginBtn();
+        return new UserPage(driver,wait);
+    }
+
 }
