@@ -80,7 +80,7 @@ public class LoginPage extends BasePage{
 
 
     public void enterLogin (String UserLogin){
-
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
                 .click();
         wait.until(ExpectedConditions.visibilityOf(loginField));
@@ -105,6 +105,7 @@ public class LoginPage extends BasePage{
         logger.info("Нажимаем ЛОГИН");
         loginButton
                 .submit();
+
 //        WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
 //        logger.info("Авторизация прошла успешно");
     }

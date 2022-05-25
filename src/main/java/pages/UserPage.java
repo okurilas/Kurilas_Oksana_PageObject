@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class UserPage extends BasePage {
@@ -89,6 +90,7 @@ public class UserPage extends BasePage {
 
         logger.info("Открыть Личный кабинет");
 
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(username))
                 .click();
         wait.until(ExpectedConditions.elementToBeClickable(lk))

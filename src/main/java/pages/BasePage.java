@@ -19,7 +19,7 @@ public abstract class BasePage {
     protected WebDriver driver;
     public IConfigServer cfg = ConfigFactory.create(IConfigServer.class);
     protected Logger logger = LogManager.getLogger(LoginPage.class);
-    protected WebDriverWait wait; //= new WebDriverWait(driver, Duration.ofSeconds(10));;
+    public WebDriverWait wait;// = new WebDriverWait(driver, Duration.ofSeconds(10));
     protected Actions actions;// = new Actions(driver);
 
     @FindBy(css = ".header2__logo")

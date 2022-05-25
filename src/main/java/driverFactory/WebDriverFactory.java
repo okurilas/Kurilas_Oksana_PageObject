@@ -3,9 +3,13 @@ package driverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+
+import javax.annotation.Nullable;
 
 public class WebDriverFactory {
 
@@ -19,7 +23,7 @@ public class WebDriverFactory {
 //        this.nameOfBrowser = nameOfBrowser;
 //    }
 
-    public static WebDriver getDriver(Browsers nameOfBrowser) {
+    public static WebDriver getDriver(Browsers nameOfBrowser, ChromeOptions... options) {
 
 
         switch (nameOfBrowser) {
@@ -43,6 +47,16 @@ public class WebDriverFactory {
         }
     }
 }
+
+//    Создайте класс WebDriverFactory со статическим методом create();
+//    Метод create() принимает обязательный параметр webDriverName и необязтельный параметр options,
+//    а возвращает соответствующий имени вебдрайвер с заданными (если были) options
+//        Примеры использования
+//        WebDriver wd = WebDriverFactory.createNewDriver("chrome");
+//        или
+//        FirefoxOptions options = new FirefoxOptions();
+//        WebDriver wd = WebDriverFactory.createNewDriver("firefox", options);
+
 
 //    public static WebDriver getDriver(String driverName) {
 //

@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -21,6 +23,7 @@ import pages.UserPage;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 
 public class TestsOnOtusWebsite  {
 
@@ -79,10 +82,10 @@ public class TestsOnOtusWebsite  {
         lkPage.changePersonalData();
 //        userPage.changeName();
 
-        actions = new Actions(driver);//
-        actions
-                .sendKeys(Keys.SPACE)
-                .perform();
+//        actions = new Actions(driver);//
+//        actions
+//                .sendKeys(Keys.SPACE)
+//                .perform();
 
         lkPage.changeAddress();
 //        userPage.changeAddress();
@@ -97,9 +100,11 @@ public class TestsOnOtusWebsite  {
 //        WebElement contactValueTwo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("id_contact-1-value")));
 
         //(String ValueOfContact, Integer i,List<WebElement> contactType,WebElement contactValue)
-        actions
-                .sendKeys(Keys.SPACE)
-                .perform();
+
+//        actions
+//                .sendKeys(Keys.SPACE)
+//                .perform();
+
         lkPage.changeContactData("VK",0, 1, 0);
         lkPage.addContact();
         lkPage.changeContactData("FB",1, 8, 1);
@@ -155,10 +160,10 @@ public class TestsOnOtusWebsite  {
         String valueDateOfBirth = lkPage.getDateOfBirth();
         Assert.assertTrue(valueDateOfBirth.contains("21.09.1988"));
 
-        actions = new Actions(driver);//
-        actions
-                .sendKeys(Keys.SPACE)
-                .perform();
+//        actions = new Actions(driver);//
+//        actions
+//                .sendKeys(Keys.SPACE)
+//                .perform();
 
         String CountryCheck = lkPage.getCountry();
         Assert.assertTrue(CountryCheck.contains("Россия"));
@@ -182,8 +187,14 @@ public class TestsOnOtusWebsite  {
     }
 
     private void init(){
-        //String brName = System.getProperty("br");
-        driver = WebDriverFactory.getDriver(Browsers.CHROME);
+        String brName = System.getProperty("browser").toUpperCase(Locale.ROOT);
+        driver = WebDriverFactory.getDriver(Browsers.valueOf(brName));
+        //driver = WebDriverFactory.getDriver(Browsers.CHROME);
+
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("start-fullscreen");
+//        driver = WebDriverFactory.getDriver(Browsers.CHROME, options);
+
         logger.info("драйвер поднят");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         //actions = new Actions(driver);

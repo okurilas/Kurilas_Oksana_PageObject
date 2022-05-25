@@ -1,12 +1,15 @@
 package pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class LKPage extends BasePage{
@@ -91,6 +94,7 @@ public class LKPage extends BasePage{
 
 
     public void openAboutMeSection() {
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(aboutMe))
                 .click();
 
@@ -134,6 +138,10 @@ public class LKPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(birth))
                 .sendKeys("21.09.1988");
 
+//        actions = new Actions(driver);//
+//        actions
+//                .sendKeys(Keys.SPACE)
+//                .perform();
     }
 
     public void changeAddress() throws InterruptedException {
@@ -156,6 +164,10 @@ public class LKPage extends BasePage{
                 .click();
         wait.until(ExpectedConditions.elementToBeClickable(languageLevelValue))
                 .click();
+
+        //        actions
+//                .sendKeys(Keys.SPACE)
+//                .perform();
     }
 
 public  void addContact(){
@@ -256,6 +268,12 @@ public  void addContact(){
 
 
     public String getCountry() {
+
+        //        actions = new Actions(driver);//
+//        actions
+//                .sendKeys(Keys.SPACE)
+//                .perform();
+
         String CountryCheck = wait.until(ExpectedConditions.visibilityOf(valueOfCountry)).getText();
         logger.info("Страна " + CountryCheck);
         return CountryCheck;
