@@ -19,9 +19,7 @@ public class WebDriverFactory {
         return nameOfBrowser;
     }
 
-//    public void setNameOfBrowser(Browsers nameOfBrowser) {
-//        this.nameOfBrowser = nameOfBrowser;
-//    }
+
 
     public static WebDriver getDriver(Browsers nameOfBrowser, ChromeOptions... options) {
 
@@ -48,40 +46,6 @@ public class WebDriverFactory {
     }
 }
 
-//    Создайте класс WebDriverFactory со статическим методом create();
-//    Метод create() принимает обязательный параметр webDriverName и необязтельный параметр options,
-//    а возвращает соответствующий имени вебдрайвер с заданными (если были) options
-//        Примеры использования
-//        WebDriver wd = WebDriverFactory.createNewDriver("chrome");
-//        или
-//        FirefoxOptions options = new FirefoxOptions();
-//        WebDriver wd = WebDriverFactory.createNewDriver("firefox", options);
-
-
-//    public static WebDriver getDriver(String driverName) {
-//
-//
-//
-//            switch (driverName) {
-//                case "chrome":
-//                    WebDriverManager.chromedriver().setup();
-//                    return new ChromeDriver();
-//                case "firefox":
-//                    WebDriverManager.firefoxdriver().setup();
-//                    return new FirefoxDriver();
-//                case "ie":
-//                    WebDriverManager.iedriver().setup();
-//                    return new InternetExplorerDriver();
-//                case "opera":
-//                    WebDriverManager.operadriver().setup();
-//                    return new OperaDriver();
-//
-//                default:
-//                    WebDriverManager.chromedriver().setup();
-//                    return new ChromeDriver();
-//
-//            }
-//        }
 
 
 

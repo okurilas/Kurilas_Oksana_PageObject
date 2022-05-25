@@ -37,7 +37,6 @@ public class TestsOnOtusWebsite  {
 
     @Before
     public void setUp(){
-        String brName = System.getProperty("br");
         logger.info("драйвер поднят");
     }
 
@@ -64,53 +63,22 @@ public class TestsOnOtusWebsite  {
 
         loginPage.login(UserLogin, UserPWD);
 
-//        WebElement avatarPic = loginPage.login(UserLogin, UserPWD);
-//        Assert.assertTrue((avatarPic).isDisplayed());
-
-
         UserPage userPage = new UserPage(driver, wait);
         userPage.openLK();
-//        String text = userPage.openLK();
-//        Assert.assertTrue(text.contains("Личный кабинет"));
 
         logger.info("Открываем секцию О СЕБЕ");
 
         LKPage lkPage = new LKPage(driver,wait);
         lkPage.openAboutMeSection();
-        //userPage.openAboutMeSection();
 
         lkPage.changePersonalData();
-//        userPage.changeName();
-
-//        actions = new Actions(driver);//
-//        actions
-//                .sendKeys(Keys.SPACE)
-//                .perform();
 
         lkPage.changeAddress();
-//        userPage.changeAddress();
-
-
-
-
-
-//        List<WebElement> vkk = driver.findElements(By.xpath("//button[contains(text(),'VK')]"));
-//        List<WebElement> facebook = driver.findElements(By.xpath("//button[contains(text(),'Facebook')]"));
-//        WebElement contactValueOne = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("id_contact-0-value")));
-//        WebElement contactValueTwo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("id_contact-1-value")));
-
-        //(String ValueOfContact, Integer i,List<WebElement> contactType,WebElement contactValue)
-
-//        actions
-//                .sendKeys(Keys.SPACE)
-//                .perform();
 
         lkPage.changeContactData("VK",0, 1, 0);
         lkPage.addContact();
         lkPage.changeContactData("FB",1, 8, 1);
         lkPage.saveChangedData();
-
-//        userPage.changeContactData();
 
         driver.close();
 
@@ -122,18 +90,8 @@ public class TestsOnOtusWebsite  {
 
         loginPage.login(UserLogin, UserPWD);
 
-        //avatarPic = loginPage.login(UserLogin, UserPWD);
-        //Assert.assertTrue((avatarPic).isDisplayed());
-
-
-
-//        logger.info("Авторизация прошла успешно");
-
         userPage = new UserPage(driver, wait);
         userPage.openLK();
-
-//        text = userPage.openLK();
-//        Assert.assertTrue(text.contains("Личный кабинет"));
 
         logger.info("Открываем секцию О СЕБЕ");
 
@@ -160,11 +118,6 @@ public class TestsOnOtusWebsite  {
         String valueDateOfBirth = lkPage.getDateOfBirth();
         Assert.assertTrue(valueDateOfBirth.contains("21.09.1988"));
 
-//        actions = new Actions(driver);//
-//        actions
-//                .sendKeys(Keys.SPACE)
-//                .perform();
-
         String CountryCheck = lkPage.getCountry();
         Assert.assertTrue(CountryCheck.contains("Россия"));
 
@@ -178,18 +131,11 @@ public class TestsOnOtusWebsite  {
         Assert.assertTrue(contactOne.contains("Facebook"));
         String contactTwo = lkPage.checkContacts(1);
         Assert.assertTrue(contactTwo.contains("VK"));
-
-//        String contactOne = lkPage.finalCheckContactOne();
-//        Assert.assertTrue(contactOne.contains("Facebook"));
-//        String contactTwo = lkPage.finalCheckContactTwo();
-//        Assert.assertTrue(contactTwo.contains("VK"));
-
     }
 
     private void init(){
         String brName = System.getProperty("browser").toUpperCase(Locale.ROOT);
         driver = WebDriverFactory.getDriver(Browsers.valueOf(brName));
-        //driver = WebDriverFactory.getDriver(Browsers.CHROME);
 
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("start-fullscreen");
@@ -197,9 +143,7 @@ public class TestsOnOtusWebsite  {
 
         logger.info("драйвер поднят");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //actions = new Actions(driver);
     }
-
 
 }
 

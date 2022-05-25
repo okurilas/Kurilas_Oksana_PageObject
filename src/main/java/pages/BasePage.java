@@ -19,8 +19,8 @@ public abstract class BasePage {
     protected WebDriver driver;
     public IConfigServer cfg = ConfigFactory.create(IConfigServer.class);
     protected Logger logger = LogManager.getLogger(LoginPage.class);
-    public WebDriverWait wait;// = new WebDriverWait(driver, Duration.ofSeconds(10));
-    protected Actions actions;// = new Actions(driver);
+    public WebDriverWait wait;
+    protected Actions actions;
 
     @FindBy(css = ".header2__logo")
     private WebElement  otusHeader;
@@ -33,7 +33,6 @@ public abstract class BasePage {
 
     public WebElement open (){
         driver.get(cfg.urlOTUS());
-        //WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
         return wait.until(ExpectedConditions.visibilityOf(otusHeader));
     }
 

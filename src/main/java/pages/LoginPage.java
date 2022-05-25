@@ -20,14 +20,6 @@ import java.time.Duration;
 
 public class LoginPage extends BasePage{
 
-    //private WebDriver driver;
-    //private IConfigServer cfg = ConfigFactory.create(IConfigServer.class);
-    //private Logger logger = LogManager.getLogger(LoginPage.class);
-    //private WebDriverWait wait;
-    //private Actions actions;
-
-//    @FindBy (css = ".header2__logo")
-//    private WebElement  otusHeader;
     @FindBy (xpath = "//button[contains(text(),'Вход')]")
     private WebElement loginBtn;
     @FindBy (css = ".js-login input[name='email']")
@@ -44,43 +36,7 @@ public class LoginPage extends BasePage{
 
     }
 
-//    public WebElement open (){
-//        driver.get(cfg.urlOTUS());
-//        WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
-//        return headerOTUS;
-//    }
-
-//    public void init (){
-////        driver = WebDriverFactory.getDriver("chrome");
-////        logger.info("драйвер поднят");
-////        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-////        actions = new Actions(driver);
-//    }
-
-//    public WebElement login (String UserLogin, String UserPWD){
-//
-//        logger.info("Авторизация");
-//
-//        wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
-//                .click();
-//        wait.until(ExpectedConditions.visibilityOf(loginField));
-//        wait.until(ExpectedConditions.visibilityOf(pwdField));
-//
-//        loginField
-//                .sendKeys(UserLogin);//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
-//        pwdField
-//                .sendKeys(UserPWD);//.sendKeys("Caiman123!");//.sendKeys(cfg.pwd());
-//        loginButton
-//                .submit();
-//
-//        WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
-//        logger.info("Авторизация прошла успешно");
-//        return avatarPic;
-//    }
-
-
     public void enterLogin (String UserLogin){
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
                 .click();
         wait.until(ExpectedConditions.visibilityOf(loginField));
@@ -88,30 +44,24 @@ public class LoginPage extends BasePage{
 
         logger.info("Ввод логина");
         loginField
-                .sendKeys(UserLogin);//.sendKeys("oksana777@list.ru");//.sendKeys(cfg.login());
+                .sendKeys(UserLogin);
     }
 
     public void enterPWD (String UserPWD){
-
         logger.info("Ввод пароля");
         pwdField
-                .sendKeys(UserPWD);//.sendKeys("Caiman123!");//.sendKeys(cfg.pwd());
+                .sendKeys(UserPWD);
         loginButton
                 .submit();
     }
 
     public void clickLoginBtn (){
-
         logger.info("Нажимаем ЛОГИН");
         loginButton
                 .submit();
-
-//        WebElement avatarPic = wait.until(ExpectedConditions.visibilityOf(avatar));
-//        logger.info("Авторизация прошла успешно");
     }
 
     public UserPage login (String UserLogin, String UserPWD){
-
         logger.info("Авторизация");
         enterLogin(UserLogin);
         enterPWD(UserPWD);

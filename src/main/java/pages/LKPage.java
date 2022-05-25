@@ -18,10 +18,6 @@ public class LKPage extends BasePage{
 
     @FindBy(xpath = "//a[contains(text(),'О себе')]")
     private WebElement aboutMe;
-//    @FindBy(css =          "div.input.input_full.lk-cv-block__input.input_straight-bottom-right.input_straight-top-right.input_no-border-right.lk-cv-block__input_fake.lk-cv-block__input_select-fake.js-custom-select-presentation")
-//    private WebElement contactOption;
-//    @FindBys(@FindBy(css = "div.input.input_full.lk-cv-block__input.input_straight-bottom-right.input_straight-top-right.input_no-border-right.lk-cv-block__input_fake.lk-cv-block__input_select-fake.js-custom-select-presentation"))
-//    private List<WebElement> contactOptions;
 
     @FindBy (name = "fname")
     private WebElement firstname;
@@ -54,18 +50,8 @@ public class LKPage extends BasePage{
     @FindBy (xpath = "//input[@data-title='Уровень знания английского языка']/following-sibling::div")
     private WebElement  valueOfLanguageLevel;
 
-
-//    @FindBy(css = "div.input_straight-bottom-right")
-//    private WebElement contactOption;
     @FindBys(@FindBy(css = "div.input_straight-bottom-right"))
     private List<WebElement> contactOptions;
-
-//    @FindBy(xpath = "//button[contains(text(),'VK')]")
-//    private WebElement vk;
-//    @FindBys(@FindBy(xpath = "//button[contains(text(),'VK')]"))
-//    private List<WebElement> vkk;
-//    @FindBys(@FindBy(xpath = "//button[contains(text(),'Facebook')]"))
-//    private List<WebElement> facebook;
 
     @FindBys(@FindBy(xpath = "//button[@data-empty='Способ связи']//../following-sibling::button"))
     private List<WebElement> typeOfContact;
@@ -82,22 +68,13 @@ public class LKPage extends BasePage{
     @FindBy(xpath = "//button[contains(text(),'Сохранить и продолжить')]")
     private WebElement save;
 
-
-
-
-
     public LKPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-
-
-
     public void openAboutMeSection() {
-        //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(aboutMe))
                 .click();
-
     }
 
     public void changePersonalData() {
@@ -137,11 +114,6 @@ public class LKPage extends BasePage{
                 .clear();
         wait.until(ExpectedConditions.elementToBeClickable(birth))
                 .sendKeys("21.09.1988");
-
-//        actions = new Actions(driver);//
-//        actions
-//                .sendKeys(Keys.SPACE)
-//                .perform();
     }
 
     public void changeAddress() throws InterruptedException {
@@ -164,10 +136,6 @@ public class LKPage extends BasePage{
                 .click();
         wait.until(ExpectedConditions.elementToBeClickable(languageLevelValue))
                 .click();
-
-        //        actions
-//                .sendKeys(Keys.SPACE)
-//                .perform();
     }
 
 public  void addContact(){
@@ -194,41 +162,7 @@ public  void addContact(){
         logger.info("Сохраняем");
         wait.until(ExpectedConditions.elementToBeClickable(save))
                 .click();
-
     }
-//
-//    public void changeContactData(){
-//        logger.info("Вводим первый контакт 'ВК'");
-//        wait.until(ExpectedConditions.visibilityOf(contactOption)).click();
-//        wait.until(ExpectedConditions.elementToBeClickable(vk))
-//                .click();
-//
-//        wait.until(ExpectedConditions.elementToBeClickable(contactValueOne))
-//                .clear();
-//        wait.until(ExpectedConditions.elementToBeClickable(contactValueOne))
-//                .sendKeys("VK");
-//
-//        logger.info("Вводим второй контакт 'ФБ'");
-//        wait.until(ExpectedConditions.elementToBeClickable(add))
-//                .click();
-//
-//        List<WebElement> li = contactOptions;
-//        li.get(1).click();
-//
-//        List<WebElement> fb = facebook;
-//        fb.get(1).click();
-//
-//        wait.until(ExpectedConditions.elementToBeClickable(contactValueTwo))
-//                .clear();
-//        wait.until(ExpectedConditions.elementToBeClickable(contactValueTwo))
-//                .sendKeys("FB");
-//
-//        logger.info("Сохраняем");
-//        wait.until(ExpectedConditions.elementToBeClickable(save))
-//                .click();
-//    }
-
-
 
     public String getFirstName() {
         String valueFirstName = wait.until(ExpectedConditions.visibilityOf(firstname)).getAttribute("value");
@@ -268,12 +202,6 @@ public  void addContact(){
 
 
     public String getCountry() {
-
-        //        actions = new Actions(driver);//
-//        actions
-//                .sendKeys(Keys.SPACE)
-//                .perform();
-
         String CountryCheck = wait.until(ExpectedConditions.visibilityOf(valueOfCountry)).getText();
         logger.info("Страна " + CountryCheck);
         return CountryCheck;
@@ -291,27 +219,11 @@ public  void addContact(){
         return LanguageCheck;
     }
 
-
     public String checkContacts(Integer i) {
         List<WebElement> contactValue = contactOptions;
         String contact = contactValue.get(i).getText();
         logger.info(contact);
         return contact;
     }
-
-
-//    public String finalCheckContactOne() {
-//
-//        String contactOne = wait.until(ExpectedConditions.visibilityOf(contactOption)).getText();
-//        logger.info(contactOne);
-//        return contactOne;
-//    }
-//    public String finalCheckContactTwo() {
-//
-//        List<WebElement> contactTwoValue = contactOptions;
-//        String contactTwo = contactTwoValue.get(1).getText();
-//        logger.info(contactTwo);
-//        return contactTwo;
-//    }
 
 }
