@@ -36,7 +36,7 @@ public class LoginPage extends BasePage{
 
     }
 
-    public void enterLogin (String UserLogin){
+    public void enterLogin(String UserLogin){
         wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
                 .click();
         wait.until(ExpectedConditions.visibilityOf(loginField));
@@ -47,7 +47,7 @@ public class LoginPage extends BasePage{
                 .sendKeys(UserLogin);
     }
 
-    public void enterPWD (String UserPWD){
+    public void enterPWD(String UserPWD){
         logger.info("Ввод пароля");
         pwdField
                 .sendKeys(UserPWD);
@@ -55,13 +55,13 @@ public class LoginPage extends BasePage{
                 .submit();
     }
 
-    public void clickLoginBtn (){
+    public void clickLoginBtn(){
         logger.info("Нажимаем ЛОГИН");
         loginButton
                 .submit();
     }
 
-    public UserPage login (String UserLogin, String UserPWD){
+    public UserPage login(String UserLogin, String UserPWD){
         logger.info("Авторизация");
         enterLogin(UserLogin);
         enterPWD(UserPWD);

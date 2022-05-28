@@ -31,7 +31,10 @@ public abstract class BasePage {
         PageFactory.initElements(driver,this);
     }
 
-    public WebElement open (){
+    public WebElement open(){
+//        String baseUrl = System.getProperty("webdriver.base.url");
+//        driver.get(baseUrl);
+
         driver.get(cfg.urlOTUS());
         return wait.until(ExpectedConditions.visibilityOf(otusHeader));
     }

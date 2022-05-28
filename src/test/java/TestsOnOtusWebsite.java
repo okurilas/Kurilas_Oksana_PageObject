@@ -30,7 +30,7 @@ public class TestsOnOtusWebsite  {
     private Logger logger = LogManager.getLogger(TestsOnOtusWebsite.class);
     private WebDriver driver;
     private WebDriverWait wait;
-    private Actions actions;
+    //private Actions actions;
 
 
 
@@ -38,6 +38,7 @@ public class TestsOnOtusWebsite  {
     @Before
     public void setUp(){
         logger.info("драйвер поднят");
+        init();
     }
 
     @After
@@ -53,7 +54,7 @@ public class TestsOnOtusWebsite  {
 
         logger.info("Открыть website OTUS");
 
-        init();
+        //init();
         LoginPage loginPage = new LoginPage(driver, wait);
         WebElement headerOTUS = loginPage.open();
         Assert.assertTrue(headerOTUS.isEnabled());
@@ -137,9 +138,11 @@ public class TestsOnOtusWebsite  {
         String brName = System.getProperty("browser").toUpperCase(Locale.ROOT);
         driver = WebDriverFactory.getDriver(Browsers.valueOf(brName));
 
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("start-fullscreen");
-//        driver = WebDriverFactory.getDriver(Browsers.CHROME, options);
+//        driver = WebDriverFactory.getDriver(Browsers.CHROME);
+
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("start-fullscreen");
+        //driver = WebDriverFactory.getDriver(Browsers.CHROME, options);
 
         logger.info("драйвер поднят");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
