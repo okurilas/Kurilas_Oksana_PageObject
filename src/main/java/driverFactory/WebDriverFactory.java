@@ -15,48 +15,24 @@ import java.util.List;
 
 public class WebDriverFactory {
 
-    //private Browsers nameOfBrowser;
-
-//    public Browsers getNameOfBrowser() {
-//        return nameOfBrowser;
-//    }
-
-
-
     public static WebDriver getDriver(Browsers nameOfBrowser) {
-    //public static WebDriver getDriver(Browsers nameOfBrowser, ChromeOptions... options) {
-//public static WebDriver getDriver(Browsers nameOfBrowser, List<String> options) {
 
         switch (nameOfBrowser) {
-//            case CHROME:
-//                //ChromeOptions chromeOptions = new ChromeOptions();
-//                //chromeOptions.addArguments(chromeOptions);
-//                WebDriverManager.chromedriver().setup();
-//                //return new ChromeDriver(chromeOptions);
-//                return new ChromeDriver();
             case FIREFOX:
-                //FirefoxOptions firefoxOptions = new FirefoxOptions();
-                //firefoxOptions.addArguments(options);
+                //FirefoxOptions firefoxOptions = new FirefoxOptions();//firefoxOptions.addArguments(options);
                 WebDriverManager.firefoxdriver().setup();
-                //return new FirefoxDriver(firefoxOptions);
-                return new FirefoxDriver();
+                return new FirefoxDriver();//return new FirefoxDriver(firefoxOptions);
             case IE:
                 WebDriverManager.iedriver().setup();
                 return new InternetExplorerDriver();
             case OPERA:
-                //OperaOptions operaOptions = new OperaOptions();
-                //operaOptions.addArguments(options);
+                //OperaOptions operaOptions = new OperaOptions();//operaOptions.addArguments(options);
                 WebDriverManager.operadriver().setup();
-                //return new OperaDriver(operaOptions);
-                return new OperaDriver();
-
+                return new OperaDriver();//return new OperaDriver(operaOptions);
             default:
-                //chromeOptions = new ChromeOptions();
-                //chromeOptions.addArguments(options);
+                //ChromeOptions chromeOptions = new ChromeOptions();//chromeOptions.addArguments(options);
                 WebDriverManager.chromedriver().setup();
-                //return new ChromeDriver(chromeOptions);
-                return new ChromeDriver();
-
+                return new ChromeDriver();//return new ChromeDriver(chromeOptions);
         }
     }
 }

@@ -31,9 +31,8 @@ public class LoginPage extends BasePage{
     @FindBy (css = "div.header2-menu__icon-img.ic-blog-default-avatar")
     private WebElement avatar;
 
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
     public void enterLogin(String UserLogin){
@@ -66,7 +65,7 @@ public class LoginPage extends BasePage{
         enterLogin(UserLogin);
         enterPWD(UserPWD);
         clickLoginBtn();
-        return new UserPage(driver,wait);
+        return new UserPage(driver);
     }
 
 }

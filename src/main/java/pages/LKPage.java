@@ -82,8 +82,8 @@ public class LKPage extends BasePage{
     @FindBy(xpath = "//div[contains(@class,'lk-cv-block__select-scroll_city')]")
     private WebElement citySelectField;
 
-    public LKPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public LKPage(WebDriver driver) {
+        super(driver);
     }
 
     public void openAboutMeSection() {
@@ -255,8 +255,8 @@ public class LKPage extends BasePage{
         Cities configCity = cfg.city();
         String getCountry = countryField.getText();
         String getCity = cityField.getText();
-        Assert.assertTrue(configCountry.getTranslate().equals(getCountry));
-        Assert.assertTrue(configCity.getTranslate().equals(getCity));
+        Assert.assertEquals(configCountry.getTranslate(), getCountry);
+        Assert.assertEquals(configCity.getTranslate(), getCity);
     }
 
 }

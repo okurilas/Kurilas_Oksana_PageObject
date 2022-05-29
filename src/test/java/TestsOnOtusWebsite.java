@@ -30,10 +30,6 @@ public class TestsOnOtusWebsite  {
     private Logger logger = LogManager.getLogger(TestsOnOtusWebsite.class);
     private WebDriver driver;
     private WebDriverWait wait;
-    //private Actions actions;
-
-
-
 
     @Before
     public void setUp(){
@@ -54,8 +50,7 @@ public class TestsOnOtusWebsite  {
 
         logger.info("Открыть website OTUS");
 
-        //init();
-        LoginPage loginPage = new LoginPage(driver, wait);
+        LoginPage loginPage = new LoginPage(driver);
         WebElement headerOTUS = loginPage.open();
         Assert.assertTrue(headerOTUS.isEnabled());
 
@@ -64,17 +59,17 @@ public class TestsOnOtusWebsite  {
 
         loginPage.login(UserLogin, UserPWD);
 
-        UserPage userPage = new UserPage(driver, wait);
+        UserPage userPage = new UserPage(driver);
         userPage.openLK();
 
         logger.info("Открываем секцию О СЕБЕ");
 
-        LKPage lkPage = new LKPage(driver,wait);
+        LKPage lkPage = new LKPage(driver);
         lkPage.openAboutMeSection();
 
         lkPage.changePersonalData();
 
-        lkPage.setCountryAndCity();//lkPage.changeAddress();
+        lkPage.setCountryAndCity();
         lkPage.checkCountryField();
 
         lkPage.changeContactData("VK",0, 1, 0);
@@ -87,17 +82,17 @@ public class TestsOnOtusWebsite  {
         init();
         logger.info("Драйвер поднят");
 
-        loginPage = new LoginPage(driver, wait);
+        loginPage = new LoginPage(driver);
         loginPage.open();
 
         loginPage.login(UserLogin, UserPWD);
 
-        userPage = new UserPage(driver, wait);
+        userPage = new UserPage(driver);
         userPage.openLK();
 
         logger.info("Открываем секцию О СЕБЕ");
 
-        lkPage = new LKPage(driver,wait);
+        lkPage = new LKPage(driver);
         lkPage.openAboutMeSection();
 
         logger.info("Финальная проверка");
@@ -138,13 +133,7 @@ public class TestsOnOtusWebsite  {
 
     private void init(){
         String brName = System.getProperty("browser").toUpperCase(Locale.ROOT);
-        driver = WebDriverFactory.getDriver(Browsers.valueOf(brName));
-
-//        driver = WebDriverFactory.getDriver(Browsers.CHROME);
-
-        //ChromeOptions options = new ChromeOptions();
-        //options.addArguments("start-fullscreen");
-        //driver = WebDriverFactory.getDriver(Browsers.CHROME, options);
+        driver = WebDriverFactory.getDriver(Browsers.valueOf(brName));//driver = WebDriverFactory.getDriver(Browsers.CHROME);
 
         logger.info("драйвер поднят");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -21,12 +21,11 @@ public class UserPage extends BasePage {
     private WebElement lk;
     @FindBy(css ="h1.title__text")
     private WebElement lkTitle;
-
     @FindBy (css = "div.header2-menu__icon-img.ic-blog-default-avatar")
     private WebElement avatar;
 
-    public UserPage(WebDriver driver, WebDriverWait wait) {
-       super(driver, wait);
+    public UserPage(WebDriver driver) {
+       super(driver);
     }
 
     public LKPage openLK(){
@@ -39,7 +38,7 @@ public class UserPage extends BasePage {
                 .click();
         String text = wait.until(ExpectedConditions.visibilityOf(lkTitle))
                 .getText();
-        return new LKPage(driver,wait);
+        return new LKPage(driver);
     }
 
 }
