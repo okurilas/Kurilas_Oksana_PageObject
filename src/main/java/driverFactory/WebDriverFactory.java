@@ -34,7 +34,7 @@ public class WebDriverFactory {
                 return new OperaDriver(operaOptions);
             default:
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments(String.valueOf(options));
+                chromeOptions.addArguments(Arrays.toString(options));
                 WebDriverManager.chromedriver().setup();
                 return new ChromeDriver(chromeOptions);
         }
