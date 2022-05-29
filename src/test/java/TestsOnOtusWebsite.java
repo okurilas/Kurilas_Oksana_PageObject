@@ -22,6 +22,7 @@ import pages.LoginPage;
 import pages.UserPage;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
