@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -20,22 +22,20 @@ import pages.LoginPage;
 import pages.UserPage;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TestsOnOtusWebsite  {
 
     private Logger logger = LogManager.getLogger(TestsOnOtusWebsite.class);
     private WebDriver driver;
     private WebDriverWait wait;
-    private Actions actions;
-
-
-
 
     @Before
     public void setUp(){
-        String brName = System.getProperty("br");
         logger.info("драйвер поднят");
+        init();
     }
 
     @After
@@ -47,12 +47,11 @@ public class TestsOnOtusWebsite  {
     }
 
     @Test
-    public void changeAboutMeSection() throws InterruptedException {
+    public void changeAboutMeSection() {
 
         logger.info("Открыть website OTUS");
 
-        init();
-        LoginPage loginPage = new LoginPage(driver, wait);
+        LoginPage loginPage = new LoginPage(driver);
         WebElement headerOTUS = loginPage.open();
         Assert.assertTrue(headerOTUS.isEnabled());
 
@@ -61,78 +60,40 @@ public class TestsOnOtusWebsite  {
 
         loginPage.login(UserLogin, UserPWD);
 
-//        WebElement avatarPic = loginPage.login(UserLogin, UserPWD);
-//        Assert.assertTrue((avatarPic).isDisplayed());
-
-
-        UserPage userPage = new UserPage(driver, wait);
+        UserPage userPage = new UserPage(driver);
         userPage.openLK();
-//        String text = userPage.openLK();
-//        Assert.assertTrue(text.contains("Личный кабинет"));
 
         logger.info("Открываем секцию О СЕБЕ");
 
-        LKPage lkPage = new LKPage(driver,wait);
+        LKPage lkPage = new LKPage(driver);
         lkPage.openAboutMeSection();
-        //userPage.openAboutMeSection();
 
         lkPage.changePersonalData();
-//        userPage.changeName();
 
-        actions = new Actions(driver);//
-        actions
-                .sendKeys(Keys.SPACE)
-                .perform();
+        lkPage.setCountryAndCity();
+        lkPage.checkCountryField();
 
-        lkPage.changeAddress();
-//        userPage.changeAddress();
-
-
-
-
-
-//        List<WebElement> vkk = driver.findElements(By.xpath("//button[contains(text(),'VK')]"));
-//        List<WebElement> facebook = driver.findElements(By.xpath("//button[contains(text(),'Facebook')]"));
-//        WebElement contactValueOne = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("id_contact-0-value")));
-//        WebElement contactValueTwo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("id_contact-1-value")));
-
-        //(String ValueOfContact, Integer i,List<WebElement> contactType,WebElement contactValue)
-        actions
-                .sendKeys(Keys.SPACE)
-                .perform();
         lkPage.changeContactData("VK",0, 1, 0);
         lkPage.addContact();
         lkPage.changeContactData("FB",1, 8, 1);
         lkPage.saveChangedData();
-
-//        userPage.changeContactData();
 
         driver.close();
 
         init();
         logger.info("Драйвер поднят");
 
-        loginPage = new LoginPage(driver, wait);
+        loginPage = new LoginPage(driver);
         loginPage.open();
 
         loginPage.login(UserLogin, UserPWD);
 
-        //avatarPic = loginPage.login(UserLogin, UserPWD);
-        //Assert.assertTrue((avatarPic).isDisplayed());
-
-
-
-//        logger.info("Авторизация прошла успешно");
-
-        userPage = new UserPage(driver, wait);
+        userPage = new UserPage(driver);
         userPage.openLK();
-
-//        text = userPage.openLK();
-//        Assert.assertTrue(text.contains("Личный кабинет"));
 
         logger.info("Открываем секцию О СЕБЕ");
 
-        lkPage = new LKPage(driver,wait);
+        lkPage = new LKPage(driver);
         lkPage.openAboutMeSection();
 
         logger.info("Финальная проверка");
@@ -155,16 +116,12 @@ public class TestsOnOtusWebsite  {
         String valueDateOfBirth = lkPage.getDateOfBirth();
         Assert.assertTrue(valueDateOfBirth.contains("21.09.1988"));
 
-        actions = new Actions(driver);//
-        actions
-                .sendKeys(Keys.SPACE)
-                .perform();
-
         String CountryCheck = lkPage.getCountry();
         Assert.assertTrue(CountryCheck.contains("Россия"));
 
         String CityCheck = lkPage.getCity();
         Assert.assertTrue(CityCheck.contains("Санкт-Петербург"));
+
 
         String LanguageCheck = lkPage.getLanguage();
         Assert.assertTrue(LanguageCheck.contains("Выше среднего (Upper Intermediate)"));
@@ -173,22 +130,15 @@ public class TestsOnOtusWebsite  {
         Assert.assertTrue(contactOne.contains("Facebook"));
         String contactTwo = lkPage.checkContacts(1);
         Assert.assertTrue(contactTwo.contains("VK"));
-
-//        String contactOne = lkPage.finalCheckContactOne();
-//        Assert.assertTrue(contactOne.contains("Facebook"));
-//        String contactTwo = lkPage.finalCheckContactTwo();
-//        Assert.assertTrue(contactTwo.contains("VK"));
-
     }
 
     private void init(){
-        //String brName = System.getProperty("br");
-        driver = WebDriverFactory.getDriver(Browsers.CHROME);
+        String brName = System.getProperty("browser").toUpperCase(Locale.ROOT);
+        driver = WebDriverFactory.getDriver(Browsers.valueOf(brName));//driver = WebDriverFactory.getDriver(Browsers.CHROME);
+
         logger.info("драйвер поднят");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //actions = new Actions(driver);
     }
-
 
 }
 

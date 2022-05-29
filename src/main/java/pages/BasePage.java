@@ -19,21 +19,21 @@ public abstract class BasePage {
     protected WebDriver driver;
     public IConfigServer cfg = ConfigFactory.create(IConfigServer.class);
     protected Logger logger = LogManager.getLogger(LoginPage.class);
-    protected WebDriverWait wait; //= new WebDriverWait(driver, Duration.ofSeconds(10));;
-    protected Actions actions;// = new Actions(driver);
+    public WebDriverWait wait;
+    protected Actions actions;
 
     @FindBy(css = ".header2__logo")
     private WebElement  otusHeader;
 
-    public BasePage(WebDriver driver, WebDriverWait wait) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = wait;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver,this);
     }
 
-    public WebElement open (){
-        driver.get(cfg.urlOTUS());
-        //WebElement headerOTUS = wait.until(ExpectedConditions.elementToBeClickable(otusHeader));
+    public WebElement open(){
+        String baseUrl = System.getProperty("webdriver.base.url");
+        driver.get(baseUrl);//driver.get(cfg.urlOTUS());
         return wait.until(ExpectedConditions.visibilityOf(otusHeader));
     }
 
