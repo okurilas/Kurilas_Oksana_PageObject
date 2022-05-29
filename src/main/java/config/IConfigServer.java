@@ -1,5 +1,7 @@
 package config;
 
+import enums.Cities;
+import enums.Countries;
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
@@ -14,4 +16,11 @@ public interface IConfigServer extends Config {
 
     @Key("pwd")
     String pwd();
+
+    @Key("country")
+    Countries country();
+
+    @Key("city")
+    Cities city();
+
 }

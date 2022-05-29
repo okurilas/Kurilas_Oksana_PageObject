@@ -50,7 +50,7 @@ public class TestsOnOtusWebsite  {
     }
 
     @Test
-    public void changeAboutMeSection() throws InterruptedException {
+    public void changeAboutMeSection() {
 
         logger.info("Открыть website OTUS");
 
@@ -74,7 +74,8 @@ public class TestsOnOtusWebsite  {
 
         lkPage.changePersonalData();
 
-        lkPage.changeAddress();
+        lkPage.setCountryAndCity();//lkPage.changeAddress();
+        lkPage.checkCountryField();
 
         lkPage.changeContactData("VK",0, 1, 0);
         lkPage.addContact();
@@ -124,6 +125,7 @@ public class TestsOnOtusWebsite  {
 
         String CityCheck = lkPage.getCity();
         Assert.assertTrue(CityCheck.contains("Санкт-Петербург"));
+
 
         String LanguageCheck = lkPage.getLanguage();
         Assert.assertTrue(LanguageCheck.contains("Выше среднего (Upper Intermediate)"));

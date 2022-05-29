@@ -1,5 +1,10 @@
 package pages;
 
+import config.IConfigServer;
+import enums.Cities;
+import enums.Countries;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,6 +72,15 @@ public class LKPage extends BasePage{
     private WebElement add;
     @FindBy(xpath = "//button[contains(text(),'Сохранить и продолжить')]")
     private WebElement save;
+
+    @FindBy(xpath = "//input[@name='country']/following-sibling::div")
+    private WebElement countryField;
+    @FindBy(xpath = "//div[contains(@class,'lk-cv-block__select-scroll_country')]")
+    private WebElement countrySelectField;
+    @FindBy(xpath = "//input[@name='city']/following-sibling::div")
+    private WebElement cityField;
+    @FindBy(xpath = "//div[contains(@class,'lk-cv-block__select-scroll_city')]")
+    private WebElement citySelectField;
 
     public LKPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -138,7 +152,7 @@ public class LKPage extends BasePage{
                 .click();
     }
 
-public  void addContact(){
+    public  void addContact(){
     logger.info("Добавляем контакт");
     wait.until(ExpectedConditions.elementToBeClickable(add))
             .click();
@@ -224,6 +238,25 @@ public  void addContact(){
         String contact = contactValue.get(i).getText();
         logger.info(contact);
         return contact;
+    }
+
+    public void setCountryAndCity() {
+        Countries configCountry = cfg.country();
+        Cities configCity  = cfg.city();
+        assert configCountry.equals(configCity.getCountry()) : "Такого города нет в этой стране";
+        countryField.click();
+        countrySelectField.findElement(By.xpath(String.format("button[@title='%s']", configCountry.getTranslate()))).click();
+        wait.until(ExpectedConditions.textToBePresentInElement(cityField,"Город"));
+        cityField.click();
+        citySelectField.findElement(By.xpath(String.format("button[@title='%s']", configCity.getTranslate()))).click();
+    }
+    public void checkCountryField() {
+        Countries configCountry = cfg.country();
+        Cities configCity = cfg.city();
+        String getCountry = countryField.getText();
+        String getCity = cityField.getText();
+        Assert.assertTrue(configCountry.getTranslate().equals(getCountry));
+        Assert.assertTrue(configCity.getTranslate().equals(getCity));
     }
 
 }
