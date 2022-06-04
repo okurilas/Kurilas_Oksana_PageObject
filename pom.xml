@@ -36,6 +36,7 @@
         <webdrivermanager.version>5.1.0</webdrivermanager.version>
         <selenium.version>4.1.3</selenium.version>
         <owner.version>1.0.12</owner.version>
+        <collections4.version>4.4</collections4.version>
     </properties>
 
     <dependencies>
@@ -72,7 +73,11 @@
             <artifactId>owner-java8</artifactId>
             <version>${owner.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${collections4.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

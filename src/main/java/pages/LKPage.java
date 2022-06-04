@@ -3,6 +3,7 @@ package pages;
 import config.IConfigServer;
 import enums.Cities;
 import enums.Countries;
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -68,6 +69,17 @@ public class LKPage extends BasePage{
     private WebElement contactValueOne;
     @FindBy(id = "id_contact-1-value")
     private WebElement contactValueTwo;
+
+    @FindBy(xpath = "//div[contains(@class,'js-formset-row')]")
+    private List<WebElement> contactContainer;
+
+    @FindBys(@FindBy(xpath ="//div[@data-prefix='contact']/child::div/child::div/child::div/child::div/child::div/child::input"))
+    private List<WebElement> existingContact;
+
+    @FindBy(xpath = "//div[@data-prefix='contact']/child::div/child::div/child::*/child::*/child::button")
+    private WebElement delete;
+    @FindBys(@FindBy(xpath = "//div[@data-prefix='contact']/child::div/child::div/child::*/child::*/child::button"))
+    private List<WebElement> deleteC;
     @FindBy(xpath = "//button[contains(text(),'Добавить')]")
     private WebElement add;
     @FindBy(xpath = "//button[contains(text(),'Сохранить и продолжить')]")
@@ -130,7 +142,7 @@ public class LKPage extends BasePage{
                 .sendKeys("21.09.1988");
     }
 
-    public void changeAddress() throws InterruptedException {
+    public void changeAddress() {
 
         logger.info("Редактируем Основную информацию");
 
@@ -140,7 +152,6 @@ public class LKPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(countryValue))
                 .click();
         logger.info("Вводим Город");
-        Thread.sleep(500);
         wait.until(ExpectedConditions.elementToBeClickable(city))
                 .click();
         wait.until(ExpectedConditions.elementToBeClickable(cityValue))
@@ -152,7 +163,44 @@ public class LKPage extends BasePage{
                 .click();
     }
 
-    public  void addContact(){
+    public void deleteContacts(Integer i){
+        logger.info("Удаляем контакты " + i);
+        for (i = 0; i < deleteC.size()-1; i++) {
+            wait.until(ExpectedConditions.visibilityOfAllElements(deleteC)).get(i).click();
+        }
+    }
+
+    public void deleteContactt() {
+        logger.info("Удаляем контакт");
+        wait.until(ExpectedConditions.elementToBeClickable(delete)).click();
+    }
+
+    public void deleteExistingContacts() {
+        List<WebElement> existingContacts = contactContainer;
+        logger.info("существующие контакты = " + existingContacts.size());
+        if (CollectionUtils.isNotEmpty(existingContacts)) {
+            for (WebElement existingContact : existingContacts) {
+                deleteContact(existingContact);
+                logger.info("Удалили контакт");
+            }
+        }
+    }
+
+
+    private void deleteContact(WebElement contact) {
+        final By deleteContainerButton = By.xpath(".//div[(contains(@class,'container__col') and contains(@class,'container__col_12') and contains(@class,'container__col_md-0'))]");
+        final By deleteBtn = By.xpath(".//button[contains(@class, 'js-formset-delete')]");
+        WebElement deleteButtonDiv = contact.findElement(deleteContainerButton);
+        deleteButtonDiv.findElement(deleteBtn).click();
+    }
+
+    public List <WebElement> checkExistingContacts(){
+        logger.info("Проверяем существующие контакты");
+        logger.info("Контактов = " + wait.until(ExpectedConditions.visibilityOfAllElements(existingContact)).size());
+        return wait.until(ExpectedConditions.visibilityOfAllElements(existingContact));
+    }
+
+    public  void addContact() {
     logger.info("Добавляем контакт");
     wait.until(ExpectedConditions.elementToBeClickable(add))
             .click();
@@ -173,7 +221,6 @@ public class LKPage extends BasePage{
     }
 
     public void saveChangedData(){
-        logger.info("Сохраняем");
         wait.until(ExpectedConditions.elementToBeClickable(save))
                 .click();
     }
@@ -242,7 +289,7 @@ public class LKPage extends BasePage{
 
     public void setCountryAndCity() {
         Countries configCountry = cfg.country();
-        Cities configCity  = cfg.city();
+        Cities configCity  = cfg.city();        //
         assert configCountry.equals(configCity.getCountry()) : "Такого города нет в этой стране";
         countryField.click();
         countrySelectField.findElement(By.xpath(String.format("button[@title='%s']", configCountry.getTranslate()))).click();

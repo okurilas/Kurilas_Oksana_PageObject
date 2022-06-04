@@ -6,24 +6,14 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LKPage;
 import pages.LoginPage;
 import pages.UserPage;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class TestsOnOtusWebsite  {
@@ -73,9 +63,14 @@ public class TestsOnOtusWebsite  {
         lkPage.setCountryAndCity();
         lkPage.checkCountryField();
 
+        lkPage.deleteContactt();
+        lkPage.saveChangedData();
+        lkPage.openAboutMeSection();
+
         lkPage.changeContactData("VK",0, 1, 0);
         lkPage.addContact();
         lkPage.changeContactData("FB",1, 8, 1);
+        logger.info("Сохраняем");
         lkPage.saveChangedData();
 
         driver.close();
@@ -130,6 +125,7 @@ public class TestsOnOtusWebsite  {
         Assert.assertTrue(contactOne.contains("Facebook"));
         String contactTwo = lkPage.checkContacts(1);
         Assert.assertTrue(contactTwo.contains("VK"));
+
     }
 
     private void init(){
